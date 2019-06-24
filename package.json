@@ -2,10 +2,16 @@
   "name": "urban_dict",
   "private": true,
   "dependencies": {
-    "@rails/ujs": "^6.0.0-alpha",
-    "turbolinks": "^5.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
-    "@rails/actioncable": "^6.0.0-alpha"
+    "@rails/ujs": "^6.0.0-alpha",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react_ujs": "^2.5.0",
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0"
 }
