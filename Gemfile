@@ -44,16 +44,19 @@ group :development, :test do
 end
 
 group :development do
+  gem "guard-minitest"
+  gem "guard" # NOTE: this is necessary in newer versions
   gem "annotate"
-  gem "web-console", ">= 3.3.0" # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "listen", ">= 3.0.5", "< 3.2"
-  gem "spring" # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring-watcher-listen", "~> 2.0.0"
   gem "rails-erd"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "spring" # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem "web-console", ">= 3.3.0" # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
 end
 
 group :test do
   gem "capybara", ">= 2.15" # Adds support for Capybara system testing and selenium driver
+  gem "ruby-prof" # https://github.com/guard/guard-minitest#rails-gem-dependencies
   gem "selenium-webdriver"
   gem "webdrivers" # Easy installation and use of web drivers to run system tests with browsers
 end

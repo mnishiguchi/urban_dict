@@ -15,7 +15,7 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
-guard :minitest do
+guard "minitest", spring: "bin/rails test" do
   # Adopted from https://github.com/guard/guard-rspec#typical-rails-app
   watch('test/test_helper.rb')                        { "test" }
   watch('config/routes.rb')                           { "test/routing" }
