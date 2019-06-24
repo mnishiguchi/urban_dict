@@ -44,6 +44,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "foreman"
   gem "guard-minitest"
   gem "guard" # NOTE: this is necessary in newer versions
   gem "annotate"
