@@ -22,6 +22,7 @@ gem "bootsnap", ">= 1.4.2", require: false # Reduces boot times through caching;
 gem "administrate"
 gem "counter_culture", "~> 2.0"
 gem "friendly_id", "~> 5.2.4"
+gem "hashdiff", [">= 1.0.0.beta1", "< 2.0.0"] # https://github.com/liufengyun/hashdiff/issues/45#issuecomment-499566400
 gem "kaminari"
 gem "rack-attack-rate-limit", require: "rack/attack/rate-limit"
 gem "rack-attack"
@@ -44,12 +45,11 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   gem "foreman"
   gem "guard-minitest"
   gem "guard" # NOTE: this is necessary in newer versions
-  gem "annotate"
   gem "listen", ">= 3.0.5", "< 3.2"
-  gem "rails-erd"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "spring" # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "web-console", ">= 3.3.0" # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -57,7 +57,11 @@ end
 
 group :test do
   gem "capybara", ">= 2.15" # Adds support for Capybara system testing and selenium driver
+  gem "minitest-reporters"
+  gem "rails-controller-testing"
   gem "ruby-prof" # https://github.com/guard/guard-minitest#rails-gem-dependencies
   gem "selenium-webdriver"
+  gem "shoulda", "~> 3.5"
+  gem "shoulda-matchers", "~> 2.0"
   gem "webdrivers" # Easy installation and use of web drivers to run system tests with browsers
 end

@@ -28,7 +28,6 @@ AllCops:
     - 'Guardfile'
     - 'node_modules/**/*'
     - 'test/fixtures/**/*'
-    - 'test/test_helper.rb'
     - 'vendor/**/*'
 
 Layout/AlignHash:
