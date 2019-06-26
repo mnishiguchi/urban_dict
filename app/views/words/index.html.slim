@@ -1,0 +1,9 @@
+- provide(:title, "Top Definitions")
+
+h1 Top Definitions
+
+- @definitions.each do |definition|
+  .card.mb-1
+    .card-body
+      - subtitle = definition.updated_at.to_date
+      = render "shared/definition_card_body", definition: definition, subtitle: subtitle

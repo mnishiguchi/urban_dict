@@ -1,0 +1,8 @@
+- provide(:title, "New Word")
+
+h1 New Word
+
+= simple_form_for(@definition, url: url_for(@definition)) do |f|
+  = render "fields", f: f
+
+  = f.submit "Create Word", class: "btn btn-primary"

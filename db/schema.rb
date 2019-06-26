@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_230134) do
+ActiveRecord::Schema.define(version: 2019_06_29_120622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,24 +37,24 @@ ActiveRecord::Schema.define(version: 2019_06_25_230134) do
   end
 
   create_table "definitions", force: :cascade do |t|
+    t.string "word", null: false
     t.text "definition", null: false
     t.text "example"
-    t.bigint "user_id", null: false
-    t.bigint "word_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "definition_vote_ups_count", default: 0, null: false
     t.integer "definition_vote_downs_count", default: 0, null: false
+    t.integer "score", default: 0, null: false
+    t.index ["updated_at"], name: "index_definitions_on_updated_at"
     t.index ["user_id"], name: "index_definitions_on_user_id"
-    t.index ["word_id"], name: "index_definitions_on_word_id"
+    t.index ["word", "score"], name: "index_definitions_on_word_and_score"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,20 +64,9 @@ ActiveRecord::Schema.define(version: 2019_06_25_230134) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "words", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_words_on_user_id"
-  end
-
   add_foreign_key "definition_tags", "definitions"
   add_foreign_key "definition_tags", "tags"
   add_foreign_key "definition_votes", "definitions"
   add_foreign_key "definition_votes", "users"
   add_foreign_key "definitions", "users"
-  add_foreign_key "definitions", "words"
-  add_foreign_key "tags", "users"
-  add_foreign_key "words", "users"
 end

@@ -1,0 +1,8 @@
+- provide(:title, "Edit Word")
+
+h1 Edit Word
+
+= simple_form_for(@definition, url: url_for(@definition)) do |f|
+  = render "fields", f: f
+
+  = f.submit "Update Word", class: "btn btn-primary"

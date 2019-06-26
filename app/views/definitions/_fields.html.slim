@@ -1,0 +1,6 @@
+/ required locals: f
+= f.input :word
+= f.input :definition
+= f.input :example
+= f.input :tags, input_html: { value: f.object.tags.join(",") }
+= f.input :user_id, as: :hidden, input_html: { value: current_user.id }

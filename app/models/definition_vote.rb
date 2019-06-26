@@ -16,7 +16,12 @@ class DefinitionVote < ApplicationRecord
   belongs_to :user
   belongs_to :definition
 
-  counter_culture :definition, column_name: ->(model) { "#{model.type.underscore.pluralize}_count" }
+  counter_culture :definition, column_name: proc { |model|
+    "#{model.type.underscore.pluralize}_count"
+  }
+  counter_culture :definition, column_name: :score, delta_magnitude: proc { |model|
+    model.type == "DefinitionVoteUp" ? 1 : -1
+  }
 
   validates :definition_id, uniqueness: { scope: :user_id }
 end

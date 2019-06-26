@@ -12,16 +12,13 @@ DefinitionVote.delete_all
 DefinitionTag.delete_all
 Tag.delete_all
 Definition.delete_all
-Word.delete_all
 User.delete_all
 
 masa = User.create!(username: "mnishiguchi", email: "mnishiguchi@example.com")
 jimi = User.create!(username: "jhendrix", email: "jhendrix@example.com")
 
-word = masa.words.create!(name: "WIP")
-
-masa.definitions.create!(word: word, definition: "Work in Progress")
-jimi.definitions.create!(word: word, definition: "What is popped?")
+masa.definitions.create!(word: "WIP", definition: "Work in Progress")
+jimi.definitions.create!(word: "WIP", definition: "What is popped?")
 
 Definition.last.definition_vote_ups.create!(user: masa)
 Definition.first.definition_vote_downs.create!(user: jimi)

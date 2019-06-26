@@ -20,14 +20,15 @@ gem "bootsnap", ">= 1.4.2", require: false # Reduces boot times through caching;
 
 # other gems for all environments
 gem "administrate"
+gem "active_link_to"
 gem "counter_culture", "~> 2.0"
-gem "friendly_id", "~> 5.2.4"
 gem "hashdiff", [">= 1.0.0.beta1", "< 2.0.0"] # https://github.com/liufengyun/hashdiff/issues/45#issuecomment-499566400
 gem "kaminari"
 gem "rack-attack-rate-limit", require: "rack/attack/rate-limit"
 gem "rack-attack"
 gem "rack-cors"
 gem "react-rails"
+gem "simple_form"
 gem "slim-rails"
 gem "strip_attributes"
 

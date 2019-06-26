@@ -1,0 +1,14 @@
+/ required locals: definition, subtitle
+h6.card-subtitle.mb-2.text-muted = subtitle
+h5.card-title = active_link_to definition.word, definitions_path(word: definition.word), active: :exact, active_disable: true
+p.card-text = definition.definition
+p.card-text = definition.example
+p.card-text by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
+div[style="display:flex"]
+  / TODO
+  = link_to "#", class: "card-link" do
+    i.fas.fa-smile #{definition.definition_vote_ups_count}
+  = link_to "#", class: "card-link" do
+    i.fas.fa-angry #{definition.definition_vote_downs_count}
+  = link_to edit_definition_path(definition), class: "card-link" do
+    i.fas.fa-edit

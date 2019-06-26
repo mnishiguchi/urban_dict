@@ -14,7 +14,6 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  should have_many(:words).class_name("Word")
   should have_many(:definitions).class_name("Definition")
   should have_many(:definition_vote_ups).class_name("DefinitionVoteUp")
   should have_many(:definition_vote_downs).class_name("DefinitionVoteDown")

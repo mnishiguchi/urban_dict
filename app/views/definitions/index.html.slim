@@ -1,0 +1,9 @@
+- provide(:title, @word)
+
+h1 = @word
+
+- @definitions.each_with_index do |definition, index|
+  .card.mb-1
+    .card-body
+      - subtitle = index.zero? ? "Top Definition" : index + 1
+      = render "shared/definition_card_body", definition: definition, subtitle: subtitle

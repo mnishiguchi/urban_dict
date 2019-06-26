@@ -1,0 +1,7 @@
+.d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
+  h5.my-0.mr-md-auto.font-weight-normal
+    = link_to "Dict", root_path, class: "navbar-brand"
+  nav.my-2.my-md-0.mr-md-3
+    = active_link_to "New Word", new_definition_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+    = active_link_to "Tags", tags_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+  a.btn.btn-outline-primary href="#" Log in
