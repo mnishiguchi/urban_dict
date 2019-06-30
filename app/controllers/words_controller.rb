@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WordsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   # Top definitions for each word.
   # GET    /words
   def index

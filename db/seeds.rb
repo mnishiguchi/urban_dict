@@ -15,12 +15,14 @@ Definition.delete_all
 User.delete_all
 
 # users
+_admin = User.create!(
+  email: "admin@example.com", password: "password", confirmed_at: Time.current, admin: true
+)
 users = User.create!(
-  [
-    { username: "mnishiguchi", email: "mnishiguchi@example.com" },
-    { username: "jhendrix", email: "jhendrix@example.com" },
-    { username: "sigi", email: "sigi@example.com" }
-  ]
+  [{ email: "user@example.com", password: "password", confirmed_at: Time.current },
+   { email: "mnishiguchi@example.com", password: "password", confirmed_at: Time.current },
+   { email: "jhendrix@example.com", password: "password", confirmed_at: Time.current },
+   { email: "sigi@example.com", password: "password", confirmed_at: Time.current }]
 )
 
 # definitions
@@ -30,7 +32,7 @@ json_files.each do |json_file|
 end
 
 # votes
-user_ids = User.ids
+user_ids = users.map(&:id)
 Definition.ids.take(10).each do |definition_id|
   DefinitionVoteUp.create!(user_id: user_ids.sample, definition_id: definition_id)
 end

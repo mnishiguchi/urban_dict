@@ -3,6 +3,10 @@
 require "test_helper"
 
 class WordsControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    sign_in create(:user)
+  end
+
   test "should get index" do
     create_list(:definition, 3)
 

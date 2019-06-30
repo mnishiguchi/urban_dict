@@ -26,4 +26,25 @@ module ApplicationHelper
 
     messages.join("/n").html_safe
   end
+
+  def form_page_content_container_tag
+    content_tag(:div, class: "container") do
+      content_tag(:div, class: "row") do
+        content_tag(:div, class: "col-md-10 offset-md-1 col-lg-8 offset-lg-2") do
+          yield
+        end
+      end
+    end
+  end
+
+  # Returns the Gravatar for the given user.
+  def gravatar_for(user, options = { size: 80 })
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    size = options[:size]
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    image_tag(gravatar_url,
+              alt: user.username,
+              title: user.email,
+              class: "gravatar img-thumbnail")
+  end
 end
