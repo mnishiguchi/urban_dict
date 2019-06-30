@@ -34,6 +34,7 @@ gem "react-rails"
 gem "simple_form"
 gem "slim-rails"
 gem "strip_attributes"
+gem "pg_search"
 
 group :development, :test do
   gem "awesome_print"

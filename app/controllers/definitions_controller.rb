@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class DefinitionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
+
   # All the definition for a given word.
   # GET    /definitions
   def index
     @word = params[:word]
-    @definitions = Definition.where(word: params[:word]).order(score: :desc)
+    @definitions = Definition.fuzzy_match_by_word(params[:word]).order(score: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @definitions }
+    end
   end
 
   # GET    /definitions/new

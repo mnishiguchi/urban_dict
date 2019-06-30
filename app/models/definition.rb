@@ -17,6 +17,12 @@
 #
 
 class Definition < ApplicationRecord
+  include PgSearch
+
+  pg_search_scope :fuzzy_match_by_word, against: :word, using: {
+    trigram: { threshold: 0.6 }
+  }
+
   strip_attributes
 
   belongs_to :user, optional: true
