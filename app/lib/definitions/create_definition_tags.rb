@@ -9,8 +9,6 @@ module Definitions
       @definition = parse_definition(definition)
     end
 
-    # The return value of this method will be available through #result.
-    # https://github.com/nebulab/simple_command
     def call
       ApplicationRecord.transaction do
         DefinitionTag.where(definition: definition).delete_all

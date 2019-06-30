@@ -8,6 +8,8 @@ require "rails/test_help"
 require "minitest/reporters"
 Minitest::Reporters.use!
 
+require_relative "./support/vcr.rb"
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
