@@ -36,6 +36,16 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :email, presence: true
 
+  def upvotes
+    @upvotes ||= definition_vote_ups.pluck(:definition_id)
+  end
+
+  def downvotes
+    @downvotes ||= definition_vote_downs.pluck(:definition_id)
+  end
+
+  private
+
   def assign_username
     self.username ||= email.to_s.partition("@").first
   end

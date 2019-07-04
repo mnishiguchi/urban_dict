@@ -5,7 +5,5 @@
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'izitoast/dist/css/iziToast';
 
-// fontawesome
-$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/solid';
+// custom styles
+@import 'voting_thumbs';

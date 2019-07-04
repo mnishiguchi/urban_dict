@@ -30,7 +30,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
+      Definitions::UpdateTags.call(tag_names: tag_names, definition: @definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :new
@@ -56,7 +56,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
+      Definitions::UpdateTags.call(tag_names: tag_names, definition: @definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :edit

@@ -14,10 +14,6 @@ p.card-text
 p.card-text
   b by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
 div[style="display:flex"]
-  / TODO
-  = link_to "#", class: "card-link" do
-    i.fas.fa-smile #{definition.definition_vote_ups_count}
-  = link_to "#", class: "card-link" do
-    i.fas.fa-angry #{definition.definition_vote_downs_count}
-  = link_to edit_definition_path(definition), class: "card-link" do
-    i.fas.fa-edit
+  div[style="flex:2" class="js-VotingThumbs" data-definition-id="#{definition.id}"]
+    = render "shared/voting_thumbs", definition: definition
+  = link_to "Edit", edit_definition_path(definition), class: "card-link"

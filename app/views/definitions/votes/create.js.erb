@@ -1,0 +1,30 @@
+// Update voting thumbs
+var votingThumbs = document.querySelector(
+  '.js-VotingThumbs[data-definition-id="<%= @definition.id %>"]'
+);
+votingThumbs.innerHTML = '<%= j render("shared/voting_thumbs", definition: @definition) %>';
+
+// Set vote counts
+document.querySelector('[data-upvotes]').dataset.upvotes = '<%= j current_user&.upvotes&.join(",") %>';
+document.querySelector('[data-downvotes]').dataset.downvotes = '<%= j current_user&.downvotes&.join(",") %>';
+
+// Get vote counts
+var upvotes = document.querySelector('[data-upvotes]').dataset.upvotes.split(',');
+var downvotes = document.querySelector('[data-downvotes]').dataset.downvotes.split(',');
+
+// Decorate thumbs by adding "userVote" class
+var node;
+upvotes.forEach(function(definitionId) {
+  node = document.querySelector(`.js-VotingThumbs[data-definition-id="${definitionId}"]`);
+  if (node) {
+    node.querySelector('.js-VotingThumbs-up').setAttribute('data-user-vote', true);
+    node.querySelector('.js-VotingThumbs-down').setAttribute('data-user-vote', false);
+  }
+});
+downvotes.forEach(function(definitionId) {
+  node = document.querySelector(`.js-VotingThumbs[data-definition-id="${definitionId}"]`);
+  if (node) {
+    node.querySelector('.js-VotingThumbs-up').setAttribute('data-user-vote', false);
+    node.querySelector('.js-VotingThumbs-down').setAttribute('data-user-vote', true);
+  }
+});
