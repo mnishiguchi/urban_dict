@@ -7,3 +7,5 @@ h1 = @word
     .card-body
       - subtitle = index.zero? ? "Top Definition" : index + 1
       = render "shared/definition_card_body", definition: definition, subtitle: subtitle
+
+= paginate @definitions

@@ -19,10 +19,6 @@
 class Definition < ApplicationRecord
   include PgSearch
 
-  pg_search_scope :fuzzy_match_by_word, against: :word, using: {
-    trigram: { threshold: 0.6 }
-  }
-
   strip_attributes
 
   belongs_to :user, optional: true
@@ -37,13 +33,17 @@ class Definition < ApplicationRecord
 
   alias_attribute :author, :user
 
-  scope :top_definitions, lambda {
-    find_by_sql <<~SQL.squish
-      SELECT DISTINCT ON (word) *
-      FROM definitions
-      ORDER BY word, score DESC ;
-    SQL
-  }
+  pg_search_scope :fuzzy_match_by_word, against: :word, using: { trigram: { threshold: 0.6 } }
+
+  class << self
+    def top_definitions
+      find_by_sql <<~SQL.squish
+        SELECT DISTINCT ON (word) *
+        FROM definitions
+        ORDER BY word, score DESC ;
+      SQL
+    end
+  end
 
   def tags=(_)
     raise "Please use a service object to create tags"

@@ -7,3 +7,5 @@ h1 Top Definitions
     .card-body
       - subtitle = definition.updated_at.to_date
       = render "shared/definition_card_body", definition: definition, subtitle: subtitle
+
+= paginate @definitions

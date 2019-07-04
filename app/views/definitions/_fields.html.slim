@@ -4,5 +4,5 @@ datalist[id="Definition-wordOptions"]
   = options_for_select(Definition.distinct.pluck(:word))
 = f.input :definition
 = f.input :example
-= f.input :tags, input_html: { value: f.object.tags.join(",") }
+= f.input :tags, input_html: { value: f.object.tags.join(","), placeholder: "Comma separated" }
 = f.input :user_id, as: :hidden, input_html: { value: current_user.id }

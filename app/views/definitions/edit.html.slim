@@ -1,9 +1,9 @@
-- provide(:title, "Edit Word")
+- provide(:title, "Edit Definition")
 
 = form_page_content_container_tag do
-  h1 Edit Word
+  h1 Edit Definition
 
   = simple_form_for(@definition, url: url_for(@definition)) do |f|
     = render "fields", f: f
 
-    = f.submit "Update Word", class: "btn btn-primary"
+    = f.submit "Update Definition", class: "btn btn-primary"
