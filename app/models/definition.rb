@@ -37,12 +37,21 @@ class Definition < ApplicationRecord
   scope :with_tag, ->(tag) { where(id: DefinitionTag.where(tag: tag).pluck(:definition_id)) }
 
   class << self
-    def top_definitions
-      find_by_sql <<~SQL.squish
-        SELECT DISTINCT ON (word) *
-        FROM definitions
-        ORDER BY word, score DESC ;
-      SQL
+    def top_definitions(word = nil)
+      if word.blank?
+        find_by_sql(<<~SQL.squish)
+          SELECT DISTINCT ON (word) *
+          FROM definitions
+          ORDER BY word, score DESC ;
+        SQL
+      else
+        find_by_sql([<<~SQL.squish, "%#{word}%"])
+          SELECT DISTINCT ON (word) *
+          FROM definitions
+          WHERE word ILIKE ?
+          ORDER BY word, score DESC ;
+        SQL
+      end
     end
   end
 

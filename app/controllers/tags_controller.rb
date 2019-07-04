@@ -7,6 +7,6 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @definitions = Definition.with_tag(@tag).page(params[:page]).per(2)
+    @definitions = Definition.with_tag(@tag).page(params[:page]).per(20)
   end
 end

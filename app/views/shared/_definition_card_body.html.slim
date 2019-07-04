@@ -1,13 +1,18 @@
 / required locals: definition, subtitle
-h6.card-subtitle.mb-2.text-muted = subtitle
-h5.card-title = active_link_to definition.word, definitions_path(word: definition.word), active: :exact, active_disable: true
-p.card-text = definition.definition
-p.card-text = definition.example
-p.card-text by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
+.card-subtitle.mb-1
+  mark = subtitle
+h5.card-title
+  = active_link_to definition.word, definitions_path(word: definition.word), active: :exact, active_disable: true
+p.card-text
+  = definition.definition
+p.card-text
+  i = definition.example
 p.card-text
   - definition.tags.each do |tag|
     = link_to tag do
       span.badge.badge-dark.mr-1 = tag.name
+p.card-text
+  b by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
 div[style="display:flex"]
   / TODO
   = link_to "#", class: "card-link" do

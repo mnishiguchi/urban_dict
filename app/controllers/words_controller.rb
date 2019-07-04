@@ -6,8 +6,9 @@ class WordsController < ApplicationController
   # Top definitions for each word.
   # GET    /words
   def index
-    rows = Definition.top_definitions
+    @q = params[:q]
+    rows = Definition.top_definitions(params[:q])
     # https://github.com/kaminari/kaminari/wiki/Kaminari-recipes#-how-do-i-paginate-an-array
-    @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(2)
+    @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(20)
   end
 end

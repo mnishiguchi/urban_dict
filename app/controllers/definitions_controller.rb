@@ -7,7 +7,7 @@ class DefinitionsController < ApplicationController
   # GET    /definitions
   def index
     @word = params[:word]
-    @definitions = Definition.fuzzy_match_by_word(params[:word]).order(score: :desc).page(params[:page]).per(2)
+    @definitions = Definition.fuzzy_match_by_word(params[:word]).order(score: :desc).page(params[:page]).per(20)
 
     respond_to do |format|
       format.html
