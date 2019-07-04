@@ -19,7 +19,7 @@ gem "jbuilder", "~> 2.5" # Build JSON APIs with ease. Read more: https://github.
 gem "bootsnap", ">= 1.4.2", require: false # Reduces boot times through caching; required in config/boot.rb
 
 # other gems for all environments
-gem "administrate"
+# gem "administrate"
 gem "active_link_to"
 gem "counter_culture", "~> 2.0"
 gem "devise"

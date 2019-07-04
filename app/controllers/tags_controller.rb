@@ -2,6 +2,11 @@
 
 class TagsController < ApplicationController
   def index
-    @tag_names = Tag.all.pluck(:name)
+    @tags = Tag.all
+  end
+
+  def show
+    @tag = Tag.find(params[:id])
+    @definitions = Definition.with_tag(@tag).page(params[:page]).per(2)
   end
 end

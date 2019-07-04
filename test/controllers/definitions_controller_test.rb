@@ -26,7 +26,7 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
                            word: "Rn",
                            definition: "Laboriosam tempore facere possimus.",
                            example: "Animi porro neque illo.",
-                           tags: "ruby,rails"
+                           tag_names: "ruby,rails"
                          })
 
     assert_redirected_to definitions_path(word: Definition.last.word)
@@ -47,7 +47,7 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
                            word: "Rn",
                            definition: "Laboriosam tempore facere possimus.",
                            example: "Animi porro neque illo.",
-                           tags: "ruby,rails"
+                           tag_names: "ruby,rails"
                          })
 
     assert_redirected_to definitions_path(word: Definition.last.word)

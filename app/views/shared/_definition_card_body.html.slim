@@ -4,6 +4,10 @@ h5.card-title = active_link_to definition.word, definitions_path(word: definitio
 p.card-text = definition.definition
 p.card-text = definition.example
 p.card-text by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
+p.card-text
+  - definition.tags.each do |tag|
+    = link_to tag do
+      span.badge.badge-dark.mr-1 = tag.name
 div[style="display:flex"]
   / TODO
   = link_to "#", class: "card-link" do

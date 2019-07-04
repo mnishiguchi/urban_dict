@@ -2,13 +2,13 @@
 
 require "test_helper"
 
-class Definitions::CreateDefinitionTagsTest < ActiveSupport::TestCase
+class Definitions::UpdateDefinitionTagsTest < ActiveSupport::TestCase
   def setup
     @valid_definition = create(:definition)
   end
 
   test "#result when success" do
-    cdt_result = Definitions::CreateDefinitionTags.call(
+    cdt_result = Definitions::UpdateDefinitionTags.call(
       tag_names: "ruby,tuesday",
       definition: @valid_definition
     )
@@ -19,7 +19,7 @@ class Definitions::CreateDefinitionTagsTest < ActiveSupport::TestCase
 
   test "#result with invalid definition" do
     assert_raise RuntimeError do
-      Definitions::CreateDefinitionTags.call(
+      Definitions::UpdateDefinitionTags.call(
         tag_names: "ruby,tuesday",
         definition: Definition.new
       )
@@ -29,7 +29,7 @@ class Definitions::CreateDefinitionTagsTest < ActiveSupport::TestCase
   test "#result with invalid tags" do
     assert_raise RuntimeError do
       InvalidTagNames = Class.new
-      Definitions::CreateDefinitionTags.call(
+      Definitions::UpdateDefinitionTags.call(
         tag_names: InvalidTagNames.new,
         definition: @valid_definition
       )

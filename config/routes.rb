@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   end
 
   resource :user, only: :show
-  resources :words, only: [:index]
+  resources :words, only: :index
   resources :definitions, only: %i[index new create edit update destroy]
-  resources :tags
+  resources :tags, only: %i[index show]
 
   root to: "words#index"
 end

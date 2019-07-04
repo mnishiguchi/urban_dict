@@ -2,6 +2,8 @@
 
 h1 Tags
 
-ul
-  - @tag_names.each do |tag_name|
-    li = tag_name
+ul.h2
+  - @tags.each do |tag|
+    li
+      = link_to tag do
+        span.badge.badge-dark.mr-1 = tag.name

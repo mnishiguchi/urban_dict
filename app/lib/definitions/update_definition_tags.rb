@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Definitions
-  class CreateDefinitionTags < ::ApplicationService
+  class UpdateDefinitionTags < ::ApplicationService
     attr_reader :tag_names, :definition
 
     def initialize(tag_names:, definition:)
