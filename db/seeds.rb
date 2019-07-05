@@ -32,13 +32,13 @@ json_files.each do |json_file|
 end
 
 # votes
-user_ids = users.map(&:id)
-Definition.ids.take(10).each do |definition_id|
-  DefinitionVoteUp.create!(user_id: user_ids.sample, definition_id: definition_id)
+Definition.all.shuffle.take(10).each do |definition|
+  DefinitionVoteUp.vote(user: users.sample, definition: definition)
 end
 
 # tags
-tags = %w[business tech general].map { |tag_name| Tag.create!(name: tag_name) }
-Definition.ids.take(10).each do |definition_id|
-  DefinitionTag.create!(tag: tags.sample, definition_id: definition_id)
+tag_names = %w[business tech general]
+Definition.all.shuffle.take(10).each do |definition|
+  definition.update(tag_names: tag_names.sample)
+  DefinitionTag.update_with_definition(definition)
 end

@@ -18,6 +18,7 @@ class DefinitionTag < ApplicationRecord
   class << self
     def update_with_definition(definition)
       ApplicationRecord.transaction do
+        definition.save!
         DefinitionTag.where(definition: definition).delete_all
         Tag.update_with_definition(definition).each do |tag|
           t = definition.definition_tags.create(tag: tag)
