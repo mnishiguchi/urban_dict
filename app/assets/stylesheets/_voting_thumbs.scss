@@ -37,9 +37,10 @@
   &:link,
   &:active {
     text-decoration: none;
+    color: #000;
   }
 
-  &:hover {
+  [data-logged-in] &:hover {
     background-color: #05ff56;
   }
 

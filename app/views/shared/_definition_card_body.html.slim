@@ -1,6 +1,7 @@
 / required locals: definition, subtitle
-.card-subtitle.mb-1
-  mark = subtitle
+- if subtitle.present?
+  .card-subtitle.mb-1
+    mark = subtitle
 h5.card-title
   = active_link_to definition.word, definitions_path(word: definition.word), active: :exact, active_disable: true
 p.card-text
@@ -13,7 +14,10 @@ p.card-text
       span.badge.badge-dark.mr-1 = tag.name
 p.card-text
   b by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
+
 div[style="display:flex"]
   div[style="flex:2" class="js-VotingThumbs" data-definition-id="#{definition.id}"]
     = render "shared/voting_thumbs", definition: definition
-  = link_to "Edit", edit_definition_path(definition), class: "card-link"
+
+  - if policy(definition).edit?
+    = link_to "Edit", edit_definition_path(definition), class: "card-link"

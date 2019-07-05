@@ -1,2 +1,10 @@
-h1 Users#show
-p Find me in app/views/users/show.html.slim
+- provide(:title, "My Favorites")
+
+h1 My Favorites
+
+- @definitions.each do |definition|
+  .card.mb-1
+    .card-body
+      = render "shared/definition_card_body", definition: definition, subtitle: false
+
+= paginate @definitions

@@ -2,6 +2,17 @@
 
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :definitions
+      resources :definition_votes
+      resources :definition_vote_ups
+      resources :definition_vote_downs
+      resources :definition_tags
+      resources :tags
+
+      root to: "users#index"
+    end
   devise_for :users,
              path: "auth",
              path_names: { sign_up: "signup", sign_in: "login", sign_out: "logout" },

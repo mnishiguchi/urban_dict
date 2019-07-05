@@ -17,12 +17,12 @@ class DefinitionsController < ApplicationController
 
   # GET    /definitions/new
   def new
-    @definition = Definition.new
+    @definition = authorize Definition.new
   end
 
   # POST   /definitions
   def create
-    @definition = Definition.find_or_initialize_by(word: definition_params[:word])
+    @definition = authorize Definition.find_or_initialize_by(word: definition_params[:word])
     unless @definition.update(definition_params)
       flash.now[:alert] = "Validation error"
       render :new
@@ -30,7 +30,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateTags.call(tag_names: tag_names, definition: @definition)
+      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :new
@@ -43,12 +43,12 @@ class DefinitionsController < ApplicationController
 
   # GET    /definitions/:id/edit
   def edit
-    @definition = Definition.find(params[:id])
+    @definition = authorize Definition.find(params[:id])
   end
 
   # PATCH  /definitions/:id
   def update
-    @definition = Definition.find(params[:id])
+    @definition = authorize Definition.find(params[:id])
     unless @definition.update(definition_params)
       flash.now[:alert] = "Validation error"
       render :edit
@@ -56,7 +56,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateTags.call(tag_names: tag_names, definition: @definition)
+      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :edit

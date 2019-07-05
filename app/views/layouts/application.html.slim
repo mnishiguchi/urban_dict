@@ -20,9 +20,12 @@ html
     / = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-  - body_data = { action: action_name.dasherize, controller: controller_path.parameterize.dasherize }
+  ruby:
+    body_data = { action: action_name.dasherize, controller: controller_path.parameterize.dasherize }
+    body_data.merge!(logged_in: true) if current_user
+    body_data.merge!(admin: true) if current_user&.admin?
   = content_tag :body, data: body_data do
     = render 'layouts/top_nav'
-    main.my-3.container
+    main.py-4.container
       = flash_tag
       = yield
