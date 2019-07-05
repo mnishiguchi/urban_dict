@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_221052) do
+ActiveRecord::Schema.define(version: 2019_07_05_173314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_06_30_221052) do
     t.integer "definition_vote_ups_count", default: 0, null: false
     t.integer "definition_vote_downs_count", default: 0, null: false
     t.integer "score", default: 0, null: false
+    t.string "tag_names"
     t.index ["updated_at"], name: "index_definitions_on_updated_at"
     t.index ["user_id"], name: "index_definitions_on_user_id"
     t.index ["word", "score"], name: "index_definitions_on_word_and_score"

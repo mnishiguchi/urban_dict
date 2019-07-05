@@ -21,6 +21,7 @@ FactoryBot.define do
     word { Faker::Science.element_symbol }
     definition { Faker::Lorem.sentence }
     example { Faker::Lorem.sentence }
+    tag_names { "" }
     user
   end
 end

@@ -30,7 +30,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
+      DefinitionTag.update_with_definition(@definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :new
@@ -56,7 +56,7 @@ class DefinitionsController < ApplicationController
     end
 
     begin
-      Definitions::UpdateDefinitionTags.call(tag_names: tag_names, definition: @definition)
+      DefinitionTag.update_with_definition(@definition)
     rescue StandardError => _e
       flash.now[:alert] = "Error saving tags"
       render :edit
@@ -75,16 +75,12 @@ class DefinitionsController < ApplicationController
   private
 
   def definition_params
-    # Exclude tag_names because a definition object cannot handle it.
-    params.require(:definition).except(:tag_names).permit(
+    params.require(:definition).permit(
       :word,
       :definition,
       :example,
+      :tag_names,
       :user_id
     )
-  end
-
-  def tag_names
-    params.permit!.dig(:definition, :tag_names).split(",")
   end
 end

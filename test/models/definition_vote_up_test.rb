@@ -15,4 +15,30 @@
 require "test_helper"
 
 class DefinitionVoteUpTest < ActiveSupport::TestCase
+  def setup
+    @definition = create(:definition)
+    @user = create(:user)
+  end
+
+  test "vote up" do
+    DefinitionVoteUp.vote(definition: @definition, user: @user)
+
+    assert @user.upvotes.include?(@definition.id)
+    assert_not @user.downvotes.include?(@definition.id)
+  end
+
+  test "unvote" do
+    2.times do
+      DefinitionVoteUp.vote(definition: @definition, user: @user)
+    end
+
+    assert_not @user.upvotes.include?(@definition.id)
+    assert_not @user.downvotes.include?(@definition.id)
+  end
+
+  test "with invalid definition" do
+    assert_raise StandardError do
+      DefinitionVoteUp.vote(definition: Definition.new, user: nil)
+    end
+  end
 end

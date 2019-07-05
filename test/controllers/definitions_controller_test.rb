@@ -4,7 +4,8 @@ require "test_helper"
 
 class DefinitionsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    sign_in create(:user)
+    @user = create(:user)
+    sign_in @user
   end
 
   test "should get index" do
@@ -33,7 +34,7 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    definition = create(:definition)
+    definition = create(:definition, user: @user)
 
     get edit_definition_url(definition)
 
@@ -41,7 +42,7 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should patch update" do
-    definition = create(:definition)
+    definition = create(:definition, user: @user)
 
     patch definition_url(definition.id, definition: {
                            word: "Rn",

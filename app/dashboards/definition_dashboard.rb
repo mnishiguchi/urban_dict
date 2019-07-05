@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "administrate/base_dashboard"
 
 class DefinitionDashboard < Administrate::BaseDashboard
@@ -20,7 +22,7 @@ class DefinitionDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     definition_vote_ups_count: Field::Number,
     definition_vote_downs_count: Field::Number,
-    score: Field::Number,
+    score: Field::Number
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,45 +30,45 @@ class DefinitionDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :user,
-    :definition_vote_ups,
-    :definition_vote_downs,
-    :definition_tags,
+  COLLECTION_ATTRIBUTES = %i[
+    user
+    definition_vote_ups
+    definition_vote_downs
+    definition_tags
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :user,
-    :definition_vote_ups,
-    :definition_vote_downs,
-    :definition_tags,
-    :id,
-    :word,
-    :definition,
-    :example,
-    :created_at,
-    :updated_at,
-    :definition_vote_ups_count,
-    :definition_vote_downs_count,
-    :score,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    user
+    definition_vote_ups
+    definition_vote_downs
+    definition_tags
+    id
+    word
+    definition
+    example
+    created_at
+    updated_at
+    definition_vote_ups_count
+    definition_vote_downs_count
+    score
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :user,
-    :definition_vote_ups,
-    :definition_vote_downs,
-    :definition_tags,
-    :word,
-    :definition,
-    :example,
-    :definition_vote_ups_count,
-    :definition_vote_downs_count,
-    :score,
+  FORM_ATTRIBUTES = %i[
+    user
+    definition_vote_ups
+    definition_vote_downs
+    definition_tags
+    word
+    definition
+    example
+    definition_vote_ups_count
+    definition_vote_downs_count
+    score
   ].freeze
 
   # Overwrite this method to customize how definitions are displayed

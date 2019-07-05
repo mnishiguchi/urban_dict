@@ -14,4 +14,17 @@
 class DefinitionTag < ApplicationRecord
   belongs_to :tag
   belongs_to :definition
+
+  class << self
+    def update_with_definition(definition)
+      ApplicationRecord.transaction do
+        DefinitionTag.where(definition: definition).delete_all
+        Tag.update_with_definition(definition).each do |tag|
+          t = definition.definition_tags.create(tag: tag)
+          raise ActiveRecord::Rollback unless t.persisted?
+        end
+      end
+      true
+    end
+  end
 end

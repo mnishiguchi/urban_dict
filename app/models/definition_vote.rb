@@ -24,4 +24,16 @@ class DefinitionVote < ApplicationRecord
   }
 
   validates :definition_id, uniqueness: { scope: :user_id }
+
+  class << self
+    def vote(user:, definition:)
+      definition_vote = DefinitionVote.find_or_initialize_by(user: user, definition: definition)
+
+      if definition_vote.type == String(self)
+        definition_vote.destroy!
+      else
+        definition_vote.update!(type: String(self))
+      end
+    end
+  end
 end

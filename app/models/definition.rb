@@ -35,6 +35,7 @@ class Definition < ApplicationRecord
 
   pg_search_scope :fuzzy_match_by_word, against: :word, using: { trigram: { threshold: 0.6 } }
   scope :with_tag, ->(tag) { where(id: DefinitionTag.where(tag: tag).pluck(:definition_id)) }
+  scope :with_tag_name, ->(tag_name) { with_tag(Tag.where(name: tag_name)) }
 
   class << self
     def top_definitions(word = nil)
@@ -53,14 +54,6 @@ class Definition < ApplicationRecord
         SQL
       end
     end
-  end
-
-  def tag_names=(_)
-    raise "Please use a service object to create tags"
-  end
-
-  def tag_names
-    Tag.where(id: tag_ids).pluck(:name)
   end
 
   def tags

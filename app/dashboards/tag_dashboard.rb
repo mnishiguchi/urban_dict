@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "administrate/base_dashboard"
 
 class TagDashboard < Administrate::BaseDashboard
@@ -12,7 +14,7 @@ class TagDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -20,21 +22,21 @@ class TagDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :definition_tags,
-    :id,
-    :name,
-    :created_at,
+  COLLECTION_ATTRIBUTES = %i[
+    definition_tags
+    id
+    name
+    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :definition_tags,
-    :id,
-    :name,
-    :created_at,
-    :updated_at,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    definition_tags
+    id
+    name
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -42,7 +44,7 @@ class TagDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :definition_tags,
-    :name,
+    :name
   ].freeze
 
   # Overwrite this method to customize how tags are displayed
