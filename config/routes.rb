@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :definition_vote_downs
     resources :definition_tags
     resources :tags
+    resources :unknown_words
 
     root to: "users#index"
   end
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     resources :votes, only: :create, module: :definitions
   end
   resources :tags, only: %i[index show]
+  resources :unknown_words, only: %i[index new create]
 
   root to: "words#index"
 end

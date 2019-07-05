@@ -1,0 +1,10 @@
+- provide(:title, "New Unknown Word")
+
+= form_page_content_container_tag do
+  h1 New Unknown Word
+
+  = simple_form_for(@unknown_word) do |f|
+    = f.input :word
+    = f.input :memo, input_html: { rows: "10" }
+
+    = f.submit "Create Unknown Word", class: "btn btn-primary"

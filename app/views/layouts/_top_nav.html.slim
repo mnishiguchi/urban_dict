@@ -3,7 +3,8 @@
     .d-flex.justify-content-between
       = link_to "Dict", root_path, class: "d-none d-sm-block"
       nav
-        = active_link_to "New Word", new_definition_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+        = active_link_to "Unknown Words", unknown_words_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+        = active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true, class: "p-2 text-dark"
         - if user_signed_in?
           span.dropdown.p-2.text-dark
             a#TopNav-userDropdown.dropdown-toggle[aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"]

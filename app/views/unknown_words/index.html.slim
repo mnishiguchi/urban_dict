@@ -1,0 +1,13 @@
+- provide(:title, "Unknown Words")
+
+h1 Unknown Words
+
+p = active_link_to "Create Unknown Word", new_unknown_word_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+
+ul
+  - @unknown_words.each do |unknown_word|
+    li
+      = link_to unknown_word.word, new_definition_path(word: unknown_word.word)
+      - if unknown_word.memo.present?
+        = " - "
+        = unknown_word.memo

@@ -19,7 +19,7 @@ class DefinitionsController < ApplicationController
 
   # GET    /definitions/new
   def new
-    @definition = authorize Definition.new
+    @definition = authorize Definition.new(word: params[:word])
   end
 
   # POST   /definitions
