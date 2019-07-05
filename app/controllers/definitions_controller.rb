@@ -7,7 +7,9 @@ class DefinitionsController < ApplicationController
   # GET    /definitions
   def index
     @word = params[:word]
-    @definitions = Definition.fuzzy_match_by_word(params[:word]).order(score: :desc).page(params[:page]).per(20)
+    rows = Definition.where(word: params[:word]).sort_by(&:score).reverse!
+    # https://github.com/kaminari/kaminari/wiki/Kaminari-recipes#-how-do-i-paginate-an-array
+    @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(20)
 
     respond_to do |format|
       format.html

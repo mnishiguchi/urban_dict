@@ -13,7 +13,7 @@
 #  updated_at                  :datetime         not null
 #  definition_vote_ups_count   :integer          default(0), not null
 #  definition_vote_downs_count :integer          default(0), not null
-#  score                       :integer          default(0), not null
+#  tag_names                   :string
 #
 
 class Definition < ApplicationRecord
@@ -39,21 +39,27 @@ class Definition < ApplicationRecord
 
   class << self
     def top_definitions(word = nil)
-      if word.blank?
-        find_by_sql(<<~SQL.squish)
-          SELECT DISTINCT ON (word) *
-          FROM definitions
-          ORDER BY word, score DESC ;
-        SQL
-      else
-        find_by_sql([<<~SQL.squish, "%#{word}%"])
-          SELECT DISTINCT ON (word) *
-          FROM definitions
-          WHERE word ILIKE ?
-          ORDER BY word, score DESC ;
-        SQL
-      end
+      result = if word.blank?
+                 find_by_sql(<<~SQL.squish)
+                   SELECT DISTINCT ON (word) *
+                   FROM definitions
+                   ORDER BY word ;
+                 SQL
+               else
+                 find_by_sql([<<~SQL.squish, "%#{word}%"])
+                   SELECT DISTINCT ON (word) *
+                   FROM definitions
+                   WHERE word ILIKE ?
+                   ORDER BY word ;
+                 SQL
+               end
+
+      result.sort_by(&:score).reverse!
     end
+  end
+
+  def score
+    definition_vote_ups_count - definition_vote_downs_count
   end
 
   def tags

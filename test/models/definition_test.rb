@@ -13,7 +13,7 @@
 #  updated_at                  :datetime         not null
 #  definition_vote_ups_count   :integer          default(0), not null
 #  definition_vote_downs_count :integer          default(0), not null
-#  score                       :integer          default(0), not null
+#  tag_names                   :string
 #
 
 require "test_helper"
