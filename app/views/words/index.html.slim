@@ -1,12 +1,14 @@
 - provide(:title, "Words")
 
 = form_with url: words_path, method: :get, local: true, html: { class: "mb-3" } do |f|
-  div.mb-2[style="display:flex"]
-    = f.text_field :q, value: @q, class: "form-control", list: "Definition-wordOptions", placeholder: "Search By Word"
-    datalist[id="Definition-wordOptions"]
+  .WordSearch.mb-2[style="display:flex"]
+    label[for="#q"]
+      i[class="fa fa-search" aria-hidden="true"]
+    = f.text_field :q, value: @q, class: "WordSearch-input form-control", list: "WordSearch-wordOptions", placeholder: "Type a word or acronym to search"
+    datalist[id="WordSearch-wordOptions"]
       = options_for_select(Definition.distinct.pluck(:word))
-    = active_link_to "x", words_path, active: :exact, active_disable: true, class: "btn btn-outline-secondary ml-1"
-    = f.submit "Search", class: "btn btn-primary ml-1"
+    = active_link_to words_path, active: :exact, active_disable: true, class: "WordSearch-cancel" do
+      i.fa.fa-times-circle
 
   - if user_signed_in?
     = active_link_to "No Filter", words_path(q: @q), active: :exact, active_disable: true
