@@ -11,7 +11,6 @@
 #  updated_at :datetime         not null
 #
 
-
 class UnknownWord < ApplicationRecord
   validates :word, presence: true
   validate lambda { |record|

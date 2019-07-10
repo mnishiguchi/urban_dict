@@ -63,6 +63,20 @@ class Definition < ApplicationRecord
     def author_contribution_hash
       Definition.group(:user_id).order(count_id: :desc).count(:id)
     end
+
+    # Unique words in alphabetical order
+    def words
+      order(:word).pluck(:word).uniq(&:downcase)
+    end
+
+    # Unique words grouped by alphabet
+    def words_grouped_by_alphabet
+      # https://stackoverflow.com/a/4410192/3837223
+      words.each_with_object(Hash.new { |h, k| h[k] = [] }) do |word, obj|
+        initial = word.first.downcase
+        obj[initial] << word
+      end
+    end
   end
 
   def score

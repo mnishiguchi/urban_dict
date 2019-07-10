@@ -11,7 +11,6 @@
 #  updated_at :datetime         not null
 #
 
-
 FactoryBot.define do
   factory :unknown_word do
     word { Faker::Science.element_symbol }
