@@ -8,3 +8,4 @@ require('bootstrap/dist/js/bootstrap.bundle.js');
 
 // Invoke custom js
 require('./definition_form.js');
+require('./word_search.js');
