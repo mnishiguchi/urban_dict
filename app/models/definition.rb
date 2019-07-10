@@ -50,6 +50,19 @@ class Definition < ApplicationRecord
     def defined_words
       distinct(:word).pluck(:word)
     end
+
+    def authors
+      User.where(id: author_ids)
+    end
+
+    # Sorted by contribution count desc.
+    def author_ids
+      author_contribution_hash.keys
+    end
+
+    def author_contribution_hash
+      Definition.group(:user_id).order(count_id: :desc).count(:id)
+    end
   end
 
   def score
