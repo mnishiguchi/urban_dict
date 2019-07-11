@@ -10,7 +10,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     create_list(:definition, 3)
 
-    get definitions_url
+    get words_url
 
     assert_response :success
   end

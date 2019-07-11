@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resource :user, only: :show
   resources :words, only: :index
-  resources :definitions, only: %i[index new create edit update destroy] do
+  resources :definitions, only: %i[new create edit update destroy] do
     resources :votes, only: :create, module: :definitions
   end
   resources :tags, only: %i[index show]

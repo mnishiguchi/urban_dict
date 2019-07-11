@@ -1,9 +1,6 @@
-/ required locals: definition, subtitle
-- if subtitle.present?
-  .card-subtitle.mb-1
-    mark = subtitle
+/ required locals: definition
 h5.card-title
-  = active_link_to definition.word, definitions_path(word: definition.word), active: :exact, active_disable: true
+  = definition.word
 p.card-text
   = definition.definition
 p.card-text

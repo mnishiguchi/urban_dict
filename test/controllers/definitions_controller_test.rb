@@ -8,14 +8,6 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should get index" do
-    definition = create(:definition)
-
-    get definitions_url(word: definition.word)
-
-    assert_response :success
-  end
-
   test "should get new" do
     get new_definition_url
 
