@@ -1,5 +1,8 @@
 document.addEventListener('turbolinks:load', function(e) {
-  document.querySelector('input[list="WordSearch-wordOptions"]').addEventListener('input', onInput);
+  var wordOptionsEl = document.querySelector('input[list="WordSearch-wordOptions"]');
+  if (wordOptionsEl) {
+    wordOptionsEl.addEventListener('input', onInput);
+  }
 
   // https://stackoverflow.com/questions/30022728/perform-action-when-clicking-html5-datalist-option
   function onInput(e) {

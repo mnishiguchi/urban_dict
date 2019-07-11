@@ -41,7 +41,7 @@
   }
 
   [data-logged-in] &:hover {
-    background-color: #05ff56;
+    background-color: $success;
   }
 
   &-up {
@@ -65,6 +65,12 @@
   }
 }
 
-[data-user-vote=true] {
-  background-color: #05ff56;
+[data-user-vote='true'] {
+  background-color: $success;
+  svg {
+    fill: $white;
+  }
+  .dcd-Thumbs-count {
+    color: $white;
+  }
 }

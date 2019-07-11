@@ -10,14 +10,14 @@
     = active_link_to words_path, active: :exact, active_disable: true, class: "WordSearch-cancel" do
       i.fa.fa-times-circle
 
-  - if user_signed_in?
-    = active_link_to "No Filter", words_path(q: @q), active: :exact, active_disable: true
-    = " | "
-    = active_link_to "My Upvotes", words_path(q: @q, user_upvotes: true), active: :exact, active_disable: true
-    = " | "
-    = active_link_to "My Downvotes", words_path(q: @q, user_downvotes: true), active: :exact, active_disable: true
-    = " | "
-    = active_link_to "My Definitions", words_path(q: @q, user_definitions: true), active: :exact, active_disable: true
+  / - if user_signed_in?
+  /   = active_link_to "No Filter", words_path(q: @q), active: :exact, active_disable: true
+  /   = " | "
+  /   = active_link_to "My Upvotes", words_path(q: @q, user_upvotes: true), active: :exact, active_disable: true
+  /   = " | "
+  /   = active_link_to "My Downvotes", words_path(q: @q, user_downvotes: true), active: :exact, active_disable: true
+  /   = " | "
+  /   = active_link_to "My Definitions", words_path(q: @q, user_definitions: true), active: :exact, active_disable: true
 
 - @definitions.each do |definition|
   .card.mb-1

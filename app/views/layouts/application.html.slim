@@ -8,7 +8,7 @@ html
     meta[name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"]
     meta[http-equiv="Accept-CH" content="DPR, Viewport-Width, Width"]
 
-    / Keep track of vote coutes
+    / Keep track of vote counts
     meta[data-upvotes="#{current_user&.upvotes&.join(',')}"]
     meta[data-downvotes="#{current_user&.downvotes&.join(',')}"]
 
@@ -28,6 +28,7 @@ html
     body_data.merge!(admin: true) if current_user&.admin?
   = content_tag :body, data: body_data do
     = render 'layouts/top_nav'
-    main.py-4.container
+    main.container
       = flash_tag
       = yield
+    = render 'layouts/footer'
