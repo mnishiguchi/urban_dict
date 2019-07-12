@@ -1,8 +1,8 @@
-- provide(:title, "Unknown Words")
+- provide(:title, "Undefined Words")
 
-h1 Unknown Words
+h1 Undefined Words
 
-p = active_link_to "Create Unknown Word", new_unknown_word_path, active: :exact, active_disable: true, class: "p-2 text-dark"
+p = active_link_to "Report Undefined Word", new_unknown_word_path, active: :exact, active_disable: true, class: "p-2 text-dark"
 
 ul
   - @unknown_words.each do |unknown_word|

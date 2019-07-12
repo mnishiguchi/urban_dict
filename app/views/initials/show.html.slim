@@ -1,0 +1,7 @@
+= render "shared/alphabet"
+
+.text-muted = "(Showing #{@words.size} of #{Definition.count} words)"
+
+ul
+  - @words.each do |word|
+    li = link_to word, words_path(q: word)

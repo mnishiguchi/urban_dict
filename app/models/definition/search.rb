@@ -1,11 +1,12 @@
 class Definition
   class Search < ApplicationService
-    attr_reader :q, :tag, :user
+    attr_reader :q, :tag, :user, :initial
 
     def initialize(opts = {})
       @q = opts[:q]
       @tag = opts[:tag]
       @user = opts[:user]
+      @user = opts[:initial]
     end
 
     def call

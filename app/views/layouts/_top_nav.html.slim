@@ -1,19 +1,16 @@
 .bg-white.border-bottom.shadow-sm
   .container-fluid
     .d-flex.justify-content-between
-      = link_to "Dictionary", root_path, class: "d-none d-sm-block text-primary font-weight-bold"
+      = yield(:top_left_link).presence || (link_to "Back To Search", root_path).html_safe
+
       nav
-        = active_link_to "Unknown Words", unknown_words_path, active: :exact, active_disable: true, class: "p-2 text-dark"
-        = active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true, class: "p-2 text-dark"
         - if user_signed_in?
           span.dropdown.p-2.text-dark
             a#TopNav-userDropdown.dropdown-toggle[aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"]
               = current_user.email
             .dropdown-menu.dropdown-menu-right[aria-labelledby="TopNav-userDropdown"]
-              = active_link_to "My Favorites", user_path, active: :exact, active_disable: true, class: "dropdown-item"
               - if current_user.admin?
                 = active_link_to "Admin Dashboard", admin_root_path, active: :exact, active_disable: true, class: "dropdown-item"
-              / = active_link_to "Account", edit_user_registration_path, active: :exact, active_disable: true, class: "dropdown-item"
               = active_link_to "Log Out", destroy_user_session_path, method: :delete, active: :exact, active_disable: true, class: "dropdown-item"
         - else
           = active_link_to "Log In", new_user_session_path, method: :post, active: :exact, active_disable: true, class: "p-2 text-dark"

@@ -1,4 +1,6 @@
 - provide(:title, "Words")
+- provide(:top_left_link) do
+  = link_to "Full List of Words", initial_path("A")
 
 = form_with url: words_path, method: :get, local: true, html: { class: "mb-3" } do |f|
   .WordSearch.mb-2[style="display:flex"]
@@ -17,3 +19,11 @@
       = render "shared/definition_card_body", definition: definition
 
 = paginate @definitions
+
+hr
+
+= render "shared/alphabet"
+
+= active_link_to "Undefined Words", unknown_words_path, active: :exact, active_disable: true
+= " | "
+= active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true

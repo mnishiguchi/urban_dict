@@ -1,22 +1,6 @@
 # frozen_string_literal: true
 
 class DefinitionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
-
-  # # All the definition for a given word.
-  # # GET    /definitions
-  # def index
-  #   @word = params[:word]
-  #   rows = Definition.where(word: params[:word]).sort_by(&:score).reverse!
-  #   # https://github.com/kaminari/kaminari/wiki/Kaminari-recipes#-how-do-i-paginate-an-array
-  #   @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(20)
-
-  #   respond_to do |format|
-  #     format.html
-  #     format.json { render json: @definitions }
-  #   end
-  # end
-
   # GET    /definitions/new
   def new
     @definition = authorize Definition.new(word: params[:word])

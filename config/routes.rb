@@ -34,5 +34,7 @@ Rails.application.routes.draw do
   resources :tags, only: %i[index show]
   resources :unknown_words, only: %i[index new create]
 
+  get "initials/:initial", to: "initials#show", constraints: { initial: /\w/ }, as: :initial
+
   root to: "words#index"
 end
