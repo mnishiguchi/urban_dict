@@ -5,7 +5,6 @@ h1 Tag:#{@tag.name}
 - @definitions.each do |definition|
   .card.mb-1
     .card-body
-      - subtitle = definition.updated_at.to_date
-      = render "shared/definition_card_body", definition: definition, subtitle: subtitle
+      = render "shared/definition_card_body", definition: definition
 
 = paginate @definitions

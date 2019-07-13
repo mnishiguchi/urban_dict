@@ -6,7 +6,8 @@
   .WordSearch.mb-2[style="display:flex"]
     label[for="#q"]
       i[class="fa fa-search" aria-hidden="true"]
-    = f.text_field :q, value: @q, class: "WordSearch-input form-control", list: "WordSearch-wordOptions", placeholder: "Type a word or acronym to search"
+    = f.text_field :q, value: @q, class: "WordSearch-input form-control",
+      list: "WordSearch-wordOptions", placeholder: "Type a word to search"
     datalist[id="WordSearch-wordOptions"]
       = options_for_select(Definition.distinct.pluck(:word))
     = active_link_to words_path, active: :exact, active_disable: true, class: "WordSearch-cancel" do
@@ -23,6 +24,8 @@
 hr
 
 = render "shared/alphabet"
+
+hr
 
 = active_link_to "Undefined Words", unknown_words_path, active: :exact, active_disable: true
 = " | "

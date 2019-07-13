@@ -1,3 +1,4 @@
-.d-flex.align-items-start.overflow-auto
+.d-flex.flex-wrap
   - ("A".."Z").to_a.each do |initial|
-    = active_link_to initial, initial_path(initial), active: :exact, active_disable: true, class: 'p-1'
+    = active_link_to initial, initial_path(initial), active: :exact, active_disable: true,
+      class: "btn btn-outline-secondary mr-1 mb-1"

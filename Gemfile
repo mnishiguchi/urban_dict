@@ -12,7 +12,6 @@ gem "puma", "~> 3.11" # Use Puma as the app server
 gem "sass-rails", "~> 5" # Use SCSS for stylesheets
 gem "webpacker", "~> 4.0" # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem "turbolinks", "~> 5" # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-# gem "jbuilder", "~> 2.5" # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'redis', '~> 4.0' # Use Redis adapter to run Action Cable in production
 # gem 'bcrypt', '~> 3.1.7' # Use Active Model has_secure_password
 # gem 'image_processing', '~> 1.2' # Use Active Storage variant
@@ -64,7 +63,6 @@ end
 group :test do
   gem "capybara", ">= 2.15" # Adds support for Capybara system testing and selenium driver
   gem "minitest-reporters"
-  # gem "rails-controller-testing"
   gem "ruby-prof" # https://github.com/guard/guard-minitest#rails-gem-dependencies
   gem "selenium-webdriver"
   gem "shoulda", "~> 3.5"
