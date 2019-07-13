@@ -2,7 +2,7 @@
 
 class UnknownWordsController < ApplicationController
   def index
-    @unknown_words = UnknownWord.where.not(word: Definition.defined_words)
+    @unknown_words = UnknownWord.where.not(word: Definition.words)
   end
 
   def new

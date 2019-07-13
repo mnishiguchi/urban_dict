@@ -29,7 +29,7 @@ class Definition < ApplicationRecord
   validates :word, presence: true
   validates :definition, presence: true
 
-  before_save -> { self.word = word.titleize }
+  before_save :standardize_on_word_format
 
   alias_attribute :author, :user
 
@@ -47,10 +47,6 @@ class Definition < ApplicationRecord
       SQL
     end
 
-    def defined_words
-      distinct(:word).pluck(:word)
-    end
-
     def authors
       User.where(id: author_ids)
     end
@@ -66,7 +62,7 @@ class Definition < ApplicationRecord
 
     # Unique words in alphabetical order
     def words
-      order(:word).pluck(:word).uniq(&:downcase)
+      distinct(:word).order(:word).pluck(:word).uniq(&:downcase)
     end
 
     # Unique words grouped by alphabet
@@ -76,6 +72,11 @@ class Definition < ApplicationRecord
         initial = word.first.downcase
         obj[initial] << word
       end
+    end
+
+    def ids_sorted_by_score
+      select(:id, :definition_vote_ups_count, :definition_vote_downs_count).
+        sort_by(&:score).reverse!.map(&:id)
     end
   end
 
@@ -97,5 +98,11 @@ class Definition < ApplicationRecord
 
   def author_name
     author.username.presence || "Unknown author"
+  end
+
+  private
+
+  def standardize_on_word_format
+    self.word = word.titleize
   end
 end

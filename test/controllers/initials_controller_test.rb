@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class InitialsControllerTest < ActionDispatch::IntegrationTest
   test "GET show" do

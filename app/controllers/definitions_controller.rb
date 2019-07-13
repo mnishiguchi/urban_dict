@@ -24,7 +24,7 @@ class DefinitionsController < ApplicationController
     end
 
     flash[:notice] = "A word definition was successfully created"
-    redirect_to definitions_path(word: @definition.word)
+    redirect_to words_url(q: @definition.word)
   end
 
   # GET    /definitions/:id/edit
@@ -50,7 +50,7 @@ class DefinitionsController < ApplicationController
     end
 
     flash[:notice] = "A word definition was successfully updated"
-    redirect_to definitions_path(word: @definition.word)
+    redirect_to words_url(q: @definition.word)
   end
 
   # DELETE /definitions/:id

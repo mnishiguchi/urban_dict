@@ -1,14 +1,37 @@
 footer
   .container
     .row[style="padding:3rem 0"]
+      / popular definitions
       .col-md-4.mb-4
-        .text-light.font-weight-bold Most Popular Definition
-        .h2.mb-0.text-white AA
-        .text-white Aesthetically Aligned
+        .text-light.h5 Popular Definitions
+        ul.list-group
+          - Definition.ids_sorted_by_score.take(5).each do |definition_id|
+            - definition = Definition.find(definition_id)
+            li.list-group-item
+              = active_link_to definition.word, words_path(q: definition.word), active: :exact, active_disable: true
+              .badge.badge-secondary.ml-1 = definition.score
+              = " - "
+              small = truncate(definition.definition, length: 70)
+        .mt-1
+          = active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true
+
+      / undefined words
       .col-md-4.mb-4
-        .text-light.font-weight-bold Newly-Defined Definition
-        .h2.mb-0.text-white Partial CU
-        .text-white Partial Closeup
+        .text-light.h5 Undefined Words
+        ul.list-group
+          - UnknownWord.limit(10).each do |unknown_word|
+            li.list-group-item
+              = active_link_to unknown_word.word, new_definition_path(word: unknown_word.word), title: unknown_word.memo, active: :exact, active_disable: true
+        .mt-1
+          = active_link_to "Register Undefined Word", new_unknown_word_path, active: :exact, active_disable: true
+          br/
+          = active_link_to "All Undefined Words", unknown_words_path, active: :exact, active_disable: true
+
+      / top contributers
       .col-md-4.mb-4
-        .text-light.font-weight-bold Top Contributor
-        .h2.mb-0.text-white Masa
+        .text-light.h5 Top Contributors
+        ul.list-group
+          - Definition.author_contribution_hash.take(10).each do |id, score|
+            li.list-group-item
+              = User.find(id).email.split("@").first
+              .badge.badge-secondary.ml-1 = score

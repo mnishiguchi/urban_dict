@@ -18,13 +18,14 @@ $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
 $red: #dc3545 !default;
+$orangered: #fa3c00 !default;
 $orange: #fd7e14 !default;
-$yellow: #ffc107 !default;
-$green: #28a745 !default;
+$yellow: #fab900 !default;
+$green: #00fa3c !default;
 $teal: #20c997 !default;
-$cyan: #17a2b8 !default;
+$cyan: #00befa !default;
 
-$primary: #fa3c00;
+$primary: $orangered;
 $secondary: $gray-600 !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -55,7 +56,7 @@ $container-max-widths: (
 //
 // Style anchor elements.
 
-$link-color: #223cd2 !default;
+$link-color: #0041fa !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;

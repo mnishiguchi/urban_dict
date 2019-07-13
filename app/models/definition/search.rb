@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class Definition
   class Search < ApplicationService
-    attr_reader :q, :tag, :user, :initial
+    attr_reader :q, :tag, :user
 
     def initialize(opts = {})
       @q = opts[:q]
       @tag = opts[:tag]
       @user = opts[:user]
-      @user = opts[:initial]
     end
 
     def call
@@ -16,6 +17,7 @@ class Definition
     end
 
     def search
+      # TODO: Sorting by score one by one is not scalable
       @search = begin
         result = Definition.all
         result = result.with_tag_name(tag) if tag.present?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_215052) do
+ActiveRecord::Schema.define(version: 2019_07_13_131858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_215052) do
     t.string "tag_names"
     t.index ["updated_at"], name: "index_definitions_on_updated_at"
     t.index ["user_id"], name: "index_definitions_on_user_id"
+    t.index ["word"], name: "index_definitions_on_word"
   end
 
   create_table "tags", force: :cascade do |t|
