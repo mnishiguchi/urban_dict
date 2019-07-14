@@ -13,4 +13,15 @@
 #
 
 class DefinitionVoteUp < DefinitionVote
+  class << self
+    def vote(user:, definition:)
+      definition_vote = DefinitionVote.find_or_initialize_by(user: user, definition: definition)
+
+      if definition_vote.is_a?(DefinitionVoteUp)
+        definition_vote.destroy!
+      else
+        definition_vote.update!(type: "DefinitionVoteUp")
+      end
+    end
+  end
 end

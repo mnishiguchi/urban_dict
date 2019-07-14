@@ -66,9 +66,6 @@ class DefinitionDashboard < Administrate::BaseDashboard
     word
     definition
     example
-    definition_vote_ups_count
-    definition_vote_downs_count
-    score
   ].freeze
 
   # Overwrite this method to customize how definitions are displayed

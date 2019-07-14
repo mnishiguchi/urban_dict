@@ -5,8 +5,7 @@ footer
       .col-md-4.mb-4
         .text-light.h5 Popular Definitions
         ul.list-group
-          - Definition.ids_sorted_by_score.take(5).each do |definition_id|
-            - definition = Definition.find(definition_id)
+          - Definition.popular(5).each do |definition|
             li.list-group-item
               = active_link_to definition.word, words_path(q: definition.word), active: :exact, active_disable: true
               .badge.badge-secondary.ml-1 = definition.score

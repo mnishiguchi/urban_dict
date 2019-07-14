@@ -22,7 +22,7 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
                            tag_names: "ruby,rails"
                          })
 
-    assert_redirected_to definitions_path(word: Definition.last.word)
+    assert_redirected_to words_path(q: Definition.last.word)
   end
 
   test "should get edit" do
@@ -43,6 +43,6 @@ class DefinitionsControllerTest < ActionDispatch::IntegrationTest
                            tag_names: "ruby,rails"
                          })
 
-    assert_redirected_to definitions_path(word: Definition.last.word)
+    assert_redirected_to words_path(q: Definition.last.word)
   end
 end

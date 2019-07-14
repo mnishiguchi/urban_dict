@@ -10,7 +10,7 @@ p.card-text
     = link_to tag do
       span.badge.badge-dark.mr-1 = tag.name
 p.card-text
-  b by #{definition.author_name} #{time_ago_in_words(definition.updated_at)} ago
+  b by #{definition.author_name} #{time_ago_in_words(definition.created_at)} ago
 
 div[style="display:flex"]
   div[style="flex:2" class="js-VotingThumbs" data-definition-id="#{definition.id}"]

@@ -16,19 +16,13 @@ class DefinitionVote < ApplicationRecord
   belongs_to :user
   belongs_to :definition
 
-  counter_culture :definition, column_name: ->(model) { "#{model.type.underscore.pluralize}_count" }
+  counter_culture :definition, column_name: ->(model) { "#{model.type.underscore.pluralize}_count" }, touch: true
 
   validates :definition_id, uniqueness: { scope: :user_id }
 
   class << self
-    def vote(user:, definition:)
-      definition_vote = DefinitionVote.find_or_initialize_by(user: user, definition: definition)
-
-      if definition_vote.type == String(self)
-        definition_vote.destroy!
-      else
-        definition_vote.update!(type: String(self))
-      end
+    def vote(*)
+      raise NotImplementedError, "Call this method from a subclass"
     end
   end
 end

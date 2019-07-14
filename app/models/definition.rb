@@ -14,6 +14,7 @@
 #  definition_vote_ups_count   :integer          default(0), not null
 #  definition_vote_downs_count :integer          default(0), not null
 #  tag_names                   :string
+#  score                       :integer          default(0), not null
 #
 
 class Definition < ApplicationRecord
@@ -31,20 +32,19 @@ class Definition < ApplicationRecord
 
   before_save :standardize_on_word_format
 
+  # Using after_find because after_touch did not work for some reason.
+  after_find :update_score
+
   alias_attribute :author, :user
 
   pg_search_scope :fuzzy_match_by_word, against: :word, using: { trigram: { threshold: 0.6 } }
   scope :with_tag, ->(tag) { where(id: DefinitionTag.where(tag: tag).pluck(:definition_id)) }
   scope :with_tag_name, ->(tag_name) { with_tag(Tag.where(name: tag_name)) }
+  scope :popular, ->(top_n = 10) { order(score: :desc).limit(top_n) }
 
   class << self
     def distinct_on_word
-      find_by_sql(<<~SQL.squish)
-        SELECT DISTINCT ON (word)
-         *
-        FROM definitions
-        ORDER BY word ;
-      SQL
+      select("DISTINCT ON (word) *").order(word: :asc, score: :desc)
     end
 
     def authors
@@ -62,7 +62,7 @@ class Definition < ApplicationRecord
 
     # Unique words in alphabetical order
     def words
-      distinct(:word).order(:word).pluck(:word).uniq(&:downcase)
+      distinct(:word).order(:word).pluck(:word)
     end
 
     # Unique words grouped by alphabet
@@ -73,15 +73,6 @@ class Definition < ApplicationRecord
         obj[initial] << word
       end
     end
-
-    def ids_sorted_by_score
-      select(:id, :definition_vote_ups_count, :definition_vote_downs_count).
-        sort_by(&:score).reverse!.map(&:id)
-    end
-  end
-
-  def score
-    definition_vote_ups_count - definition_vote_downs_count
   end
 
   def tags
@@ -92,10 +83,6 @@ class Definition < ApplicationRecord
     DefinitionTag.where(definition: self).pluck(:tag_id)
   end
 
-  def slug
-    "#{word.underscore.dasherize}-#{id}" if persisted?
-  end
-
   def author_name
     author.username.presence || "Unknown author"
   end
@@ -104,5 +91,9 @@ class Definition < ApplicationRecord
 
   def standardize_on_word_format
     self.word = word.titleize
+  end
+
+  def update_score
+    update(score: definition_vote_ups_count - definition_vote_downs_count)
   end
 end

@@ -17,12 +17,11 @@ class Definition
     end
 
     def search
-      # TODO: Sorting by score one by one is not scalable
       @search = begin
         result = Definition.all
         result = result.with_tag_name(tag) if tag.present?
         result = result.fuzzy_match_by_word(q) if q.present?
-        result.sort_by(&:score).reverse!
+        result.order(score: :desc)
       end
     end
 
