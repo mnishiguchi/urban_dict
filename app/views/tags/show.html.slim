@@ -1,6 +1,9 @@
 - provide(:title, "Tag:#{@tag.name}")
 
-h1 Tag:#{@tag.name}
+h1
+  small.mr-1
+    i.fa.fa-tag[aria-hidden="true"]
+  = @tag.name
 
 - @definitions.each do |definition|
   .card.mb-1
@@ -8,3 +11,7 @@ h1 Tag:#{@tag.name}
       = render "shared/definition_card_body", definition: definition
 
 = paginate @definitions
+
+hr
+
+= active_link_to "All Tags", tags_path, active: :exact, active_disable: true

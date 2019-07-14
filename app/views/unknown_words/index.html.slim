@@ -1,13 +1,16 @@
-- provide(:title, "Undefined Words")
+- provide(:title, "Explain Undefined Words")
 
-h1 Undefined Words
+h1 Explain Undefined Words
 
 p = active_link_to "Register Undefined Word", new_unknown_word_path, active: :exact, active_disable: true, class: "p-2 text-dark"
 
-ul
+.card-columns
   - @unknown_words.each do |unknown_word|
-    li
-      = link_to unknown_word.word, new_definition_path(word: unknown_word.word)
-      - if unknown_word.memo.present?
-        = " - "
-        = unknown_word.memo
+    = link_to new_definition_path(word: unknown_word.word), title: "Explain #{unknown_word.word}" do
+      .card
+        .card-body
+          = unknown_word.word
+          - if unknown_word.memo.present?
+            .text-muted.d-inline
+              = " - "
+              = unknown_word.memo

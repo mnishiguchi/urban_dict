@@ -13,6 +13,5 @@
 FactoryBot.define do
   factory :tag do
     name { Faker::Space.star_cluster }
-    user { nil }
   end
 end

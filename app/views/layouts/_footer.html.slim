@@ -7,12 +7,14 @@ footer
         ul.list-group
           - Definition.popular(5).each do |definition|
             li.list-group-item
-              = active_link_to definition.word, words_path(q: definition.word), active: :exact, active_disable: true
-              .badge.badge-secondary.ml-1 = definition.score
-              = " - "
-              small = truncate(definition.definition, length: 70)
+               = active_link_to words_path(q: definition.word), active: :exact, active_disable: true do
+                = definition.word
+                .badge.badge-secondary.ml-1 = definition.score
+                .text-muted.d-inline
+                  = " - "
+                  small = truncate(definition.definition, length: 70)
         .mt-1
-          = active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true
+          = active_link_to "Create Definition", new_definition_path, active: :exact, active_disable: true,  class: "text-light"
 
       / undefined words
       .col-md-4.mb-4
@@ -20,11 +22,16 @@ footer
         ul.list-group
           - UnknownWord.limit(10).each do |unknown_word|
             li.list-group-item
-              = active_link_to unknown_word.word, new_definition_path(word: unknown_word.word), title: unknown_word.memo, active: :exact, active_disable: true
+              = active_link_to unknown_word.word, new_definition_path(word: unknown_word.word), active: :exact, active_disable: true
+              - if unknown_word.memo.present?
+                .text-muted.d-inline
+                  = " - "
+                  small = truncate(unknown_word.memo, length: 70)
+
         .mt-1
-          = active_link_to "Register Undefined Word", new_unknown_word_path, active: :exact, active_disable: true
+          = active_link_to "Register Undefined Word", new_unknown_word_path, active: :exact, active_disable: true, class: "text-light"
           br/
-          = active_link_to "All Undefined Words", unknown_words_path, active: :exact, active_disable: true
+          = active_link_to "All Undefined Words", unknown_words_path, active: :exact, active_disable: true, class: "text-light"
 
       / top contributers
       .col-md-4.mb-4
@@ -34,3 +41,5 @@ footer
             li.list-group-item
               = User.find(id).email.split("@").first
               .badge.badge-secondary.ml-1 = score
+        .mt-1
+          = active_link_to "Contribute", unknown_words_path, active: :exact, active_disable: true, class: "text-light"

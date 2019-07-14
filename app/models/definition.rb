@@ -18,7 +18,7 @@
 #
 
 class Definition < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   strip_attributes
 

@@ -26,9 +26,13 @@ class DefinitionTagTest < ActiveSupport::TestCase
 
     DefinitionTag.update_with_definition(definition)
 
-    assert_not_nil Tag.find_by(name: "ruby")
-    assert_not_nil Tag.find_by(name: "tuesday")
-    assert_not_nil DefinitionTag.find_by(definition: definition, tag: Tag.find_by(name: "ruby"))
-    assert_not_nil DefinitionTag.find_by(definition: definition, tag: Tag.find_by(name: "tuesday"))
+    # Tag records are created.
+    ruby_tag = Tag.find_by(name: "Ruby")
+    tuesday_tag = Tag.find_by(name: "Tuesday")
+    assert_not_nil ruby_tag
+    assert_not_nil tuesday_tag
+    # Joint records are created for definiton and tags.
+    assert_not_nil DefinitionTag.find_by(definition: definition, tag: ruby_tag)
+    assert_not_nil DefinitionTag.find_by(definition: definition, tag: tuesday_tag)
   end
 end

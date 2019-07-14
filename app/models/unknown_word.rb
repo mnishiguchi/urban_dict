@@ -13,15 +13,19 @@
 
 class UnknownWord < ApplicationRecord
   validates :word, presence: true
-  validate lambda { |record|
-    record.errors.add(:word, "has already been explained") if Definition.words.include?(record.word.titleize)
-  }
+  validate -> { errors.add(:word, "has already been explained") if Definition.words.include?(word.to_s.titleize) }
+
+  before_save :standardize_on_word_format
 
   class << self
     def delete_already_explained
-      select(:id, :word).each do |record|
-        record.destroy if Definition.words.include?(record.word.titleize)
-      end
+      where(word: Definition.words).delete_all
     end
+  end
+
+  private
+
+  def standardize_on_word_format
+    self.word = word.titleize
   end
 end

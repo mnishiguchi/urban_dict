@@ -1,7 +1,10 @@
 = render "shared/alphabet"
 
-.text-muted = "(Showing #{@words.size} of #{Definition.count} words)"
+p.text-muted = "(Showing #{@words.size} of #{Definition.count} words)"
 
-ul
+.card-columns
   - @words.each do |word|
-    li = link_to word, words_path(q: word)
+    = link_to words_path(q: word) do
+      .card
+        .card-body
+          = word

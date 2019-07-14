@@ -14,4 +14,14 @@
 require "test_helper"
 
 class UnknownWordTest < ActiveSupport::TestCase
+  should validate_presence_of(:word)
+
+  test "delete_already_explained" do
+    create(:unknown_word, word: "Hello")
+    create(:definition, word: "Hello", definition: "Greeting in English")
+
+    assert_changes "UnknownWord.count", from: 1, to: 0 do
+      UnknownWord.delete_already_explained
+    end
+  end
 end
