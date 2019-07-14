@@ -17,13 +17,21 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }
 
+  before_validation :standardize_on_name_format
+
   alias_attribute :author, :user
 
   class << self
     def update_with_definition(definition)
       definition.tag_names.to_s.split(",").compact.uniq.map do |tag_name|
-        Tag.find_or_create_by(name: tag_name)
+        Tag.find_or_create_by(name: tag_name.titleize)
       end
     end
+  end
+
+  private
+
+  def standardize_on_name_format
+    self.name = name.titleize
   end
 end

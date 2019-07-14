@@ -2,16 +2,32 @@
 - provide(:top_left_link) do
   = link_to "Full List of Words", initial_path("A")
 
-= form_with url: words_path, method: :get, local: true, html: { class: "mb-3" } do |f|
-  .WordSearch.mb-2[style="display:flex"]
-    label[for="#q"]
-      i[class="fa fa-search" aria-hidden="true"]
-    = f.text_field :q, value: @q, class: "WordSearch-input form-control",
-      list: "WordSearch-wordOptions", placeholder: "Type a word to search"
-    datalist[id="WordSearch-wordOptions"]
+= form_with url: words_path, method: :get, local: true, html: { class: "mb-3 WordSearch" } do |f|
+  .WordSearch-searchBar.mb-2
+    label.WordSearch-searchBar-label[for="#q"]
+      i.fa.fa-search[aria-hidden="true"]
+    = f.text_field :q, value: @q,
+      class: "WordSearch-searchBar-input js-WordSearch-searchBar-input form-control",
+      list: "WordSearch-searchBar-wordOptions",
+      placeholder: "Type a word to search"
+    datalist#WordSearch-searchBar-wordOptions
       = options_for_select(Definition.distinct.pluck(:word))
-    = active_link_to words_path, active: :exact, active_disable: true, class: "WordSearch-cancel" do
+    = active_link_to words_path(q: "", tag: @tag), active: :exact, active_disable: true, class: "WordSearch-searchBar-cancel" do
       i.fa.fa-times-circle
+
+  .WordSearch-tagFilter
+    label.WordSearch-tagFilter-label[for="#tag"]
+      = active_link_to tags_path, active: :exact, active_disable: true, title: "All Tags" do
+        i.fa.fa-tag[aria-hidden="true"]
+    = f.select :tag,
+      options_for_select(Tag.pluck(:name), @tag),
+      { include_blank: true },
+      { class: "mx-2 WordSearch-tagFilter-select js-WordSearch-tagFilter-select" }
+    = active_link_to words_path(q: @q, tag: ""), active: { tag: "" }, active_disable: true, title: "Clear Tag Filter"  do
+      i.fa.fa-times-circle
+
+  / Hidden submit button that is pressed programmatically by JS.
+  input[type="submit" style="display:none" class="WordSearch-submit js-WordSearch-submit"]
 
 - @definitions.each do |definition|
   .card.mb-1

@@ -2,8 +2,9 @@
 
 h1 Tags
 
-ul.h2
+.card-columns
   - @tags.each do |tag|
-    li
-      = link_to tag do
-        span.badge.badge-dark.mr-1 = tag.name
+    = link_to tag do
+      .card
+        .card-body
+          = tag.name

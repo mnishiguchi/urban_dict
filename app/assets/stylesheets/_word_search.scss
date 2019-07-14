@@ -1,24 +1,27 @@
 .WordSearch {
-  position: relative;
+  &-searchBar {
+    position: relative;
+    display: flex;
 
-  label {
-    position: absolute;
-    left: 17px;
-    top: 12px;
-  }
+    &-label {
+      position: absolute;
+      left: 17px;
+      top: 12px;
+    }
 
-  &-input {
-    border-radius: 25px;
-    height: 3rem;
-    padding-left: 2.5rem;
-    background-color: #fff;
-  }
+    &-input {
+      border-radius: 25px;
+      height: 3rem;
+      padding-left: 2.5rem;
+      background-color: #fff;
+    }
 
-  &-cancel {
-    text-decoration: none;
-    position: absolute;
-    right: 44px;
-    top: 12px;
-    color: #b3b3b3;
+    &-cancel {
+      text-decoration: none;
+      position: absolute;
+      right: 44px;
+      top: 12px;
+      color: #b3b3b3;
+    }
   }
 }

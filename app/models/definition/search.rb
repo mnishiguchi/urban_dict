@@ -4,6 +4,8 @@ class Definition
   class Search < ApplicationService
     attr_reader :q, :tag, :user
 
+    None = Definition.none
+
     def initialize(opts = {})
       @q = opts[:q]
       @tag = opts[:tag]
@@ -11,7 +13,7 @@ class Definition
     end
 
     def call
-      return [] if q.blank? && tag.blank?
+      return None if q.blank? && tag.blank?
 
       search
     end
@@ -26,19 +28,15 @@ class Definition
     end
 
     def user_upvotes
-      user ? filter_by_ids(user.upvotes) : []
+      user ? search.where(id: user.upvotes) : None
     end
 
     def user_downvotes
-      user ? filter_by_ids(user.downvotes) : []
+      user ? search.where(id: user.downvotes) : None
     end
 
     def user_definitions
-      user ? filter_by_ids(user.definition_ids) : []
-    end
-
-    def filter_by_ids(ids)
-      search.select { |x| ids.include?(x.id) }
+      user ? search.where(id: user.definition_ids) : None
     end
   end
 end
