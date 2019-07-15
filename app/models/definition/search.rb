@@ -19,11 +19,11 @@ class Definition
     end
 
     def search
-      @search = begin
+      @search = Rails.cache.fetch(cache_key, expires_in: 3.days) do
         result = Definition.all
         result = result.with_tag_name(tag) if tag.present?
         result = result.fuzzy_match_by_word(q) if q.present?
-        result.order(score: :desc)
+        result.order(score: :desc).to_a
       end
     end
 
@@ -37,6 +37,10 @@ class Definition
 
     def user_definitions
       user ? search.where(id: user.definition_ids) : None
+    end
+
+    def cache_key
+      ActiveSupport::Cache.expand_cache_key([self.class, q, tag, user&.id])
     end
   end
 end

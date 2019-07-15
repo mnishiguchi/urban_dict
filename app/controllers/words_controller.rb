@@ -8,6 +8,7 @@ class WordsController < ApplicationController
     @q = params[:q]
     @tag = params[:tag]
 
-    @definitions = Definition::Search.call(q: params[:q], tag: params[:tag]).page(params[:page]).per(20)
+    rows = Definition::Search.call(q: params[:q], tag: params[:tag])
+    @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(10)
   end
 end

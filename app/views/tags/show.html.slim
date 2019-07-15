@@ -6,9 +6,8 @@ h1
   = @tag.name
 
 - @definitions.each do |definition|
-  .card.mb-1
-    .card-body
-      = render "shared/definition_card_body", definition: definition
+  - cache definition
+    = render "shared/definition", definition: definition
 
 = paginate @definitions
 

@@ -30,10 +30,8 @@
   input[type="submit" style="display:none" class="WordSearch-submit js-WordSearch-submit"]
 
 - @definitions.each do |definition|
-  .card.mb-1
-    .card-body
-      - subtitle = definition.updated_at.to_date
-      = render "shared/definition_card_body", definition: definition
+  - cache definition
+    = render "shared/definition", definition: definition
 
 = paginate @definitions
 

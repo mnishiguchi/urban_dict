@@ -9,6 +9,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @definitions = Definition::Search.call(tag: @tag.name).page(params[:page]).per(20)
+    rows = Definition::Search.call(tag: @tag.name)
+    @definitions = Kaminari.paginate_array(rows).page(params[:page]).per(10)
   end
 end
